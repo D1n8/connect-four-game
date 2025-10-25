@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css'
 import Board  from './components/Board'
-import Players from './components/Players';
+import PlayerComponent from './components/Player';
 import { Player } from './modules';
 
 function App() {
@@ -19,12 +19,10 @@ function App() {
         <h1 className='title'>ИГРА "4 В РЯД"</h1>
       </header>
       <main className="main">
-        <Players playerName1={playerName1} playerName2={playerName2} setPlayerName1={setPlayerName1} setPlayerName2={setPlayerName2} />
-
+        <PlayerComponent playerName={playerName1} setPlayerName={setPlayerName1} text='Игрок 1' />
         <Board rows={rows} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} playerName1={playerName1} playerName2={playerName2} />
-
+        <PlayerComponent playerName={playerName2} setPlayerName={setPlayerName2} text='Игрок 2' />
       </main>
-
     </div>
   )
 }

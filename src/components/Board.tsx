@@ -1,46 +1,16 @@
 import { useEffect, useState } from "react";
+import { Player, type IBoard, type IBoardProps } from "../modules";
+import { checkWin } from "../utils";
+import ModalResult from "./modalResult";
 
-interface IPlayer {
-    sym: 'x' | 'o',
-    status: 'winner' | 'loser' | 'in_game',
-    chips: [number, number][],
-    name: string
-}
 
-interface IBoard {
-    board_state: 'waiting' | 'pending' | 'win' | 'draw',
-    board: ('x' | 'o' | null)[][],
-    winner: IPlayer | null
-}
-
-class Player implements IPlayer {
-    sym: 'x' | 'o';
-    status: 'winner' | 'loser' | 'in_game';
-    chips: [number, number][];
-    name: string;
-    constructor(symPlayer: 'x' | 'o', status: 'winner' | 'loser' | 'in_game', chips: [number, number][], name: string) {
-        this.sym = symPlayer
-        this.status = status
-        this.chips = chips
-        this.name = name
-    }
-}
-
-function Board() {
+function Board({rows, columns, player1, player2, setPlayer1, setPlayer2 ,playerName1, playerName2}: IBoardProps) {
     // коор. х - строки (0 <= x <= 5)
     // коор. y - стобцы (0 <= y <= 6)
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
 
-    const rows = 6;
-    const columns = 7;
     const countCells = rows * columns;
-    const [player1Name, setPlayer1Name] = useState('Первый');
-    const [player2Name, setPlayer2Name] = useState('Второй');
-
-    const [player1, setPlayer1] = useState(new Player('x', 'in_game', [], player1Name));
-    const [player2, setPlayer2] = useState(new Player('o', 'in_game', [], player2Name));
     const [currentPlayer, setCurrentPlayer] = useState<Player>(player1);
-
     const [board, setBoard] = useState<IBoard>({ board_state: 'waiting', board: createBoard(), winner: null });
 
     useEffect(() => {
@@ -93,98 +63,17 @@ function Board() {
         }
     }
 
-    function includesChipInChips(chip: [number, number], chipsArr: [number, number][]) {
-        for (const item of chipsArr) {
-            if (item[0] === chip[0] && item[1] === chip[1]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // chip[0] - row, chip[1] - column
-    function checkWin(player: Player) {
-        const winPosition = [];
-        const chips = player.chips;
-        for (const [r, c] of chips) {
-            // поиск последовательности в ряд
-            if (includesChipInChips([r, c + 1], chips) &&
-                includesChipInChips([r, c + 2], chips) &&
-                includesChipInChips([r, c + 3], chips)) {
-                winPosition.push([r, c], [r, c + 1], [r, c + 2], [r, c + 3])
-                console.log(winPosition)
-                return true;
-            }
-            // поиск последовательности в колонну
-            if (includesChipInChips([r + 1, c], chips) &&
-                includesChipInChips([r + 2, c], chips) &&
-                includesChipInChips([r + 3, c], chips)) {
-                winPosition.push([r, c], [r + 1, c], [r + 2, c], [r + 3, c])
-                console.log(winPosition)
-                return true;
-            }
-            // поиск последовательности по диагоналям
-            if (includesChipInChips([r + 1, c + 1], chips) &&
-                includesChipInChips([r + 2, c + 2], chips) &&
-                includesChipInChips([r + 3, c + 3], chips)) {
-                winPosition.push([r, c], [r + 1, c + 1], [r + 2, c + 2], [r + 3, c + 3])
-                console.log(winPosition)
-                return true;
-            }
-
-            if (includesChipInChips([r - 1, c + 1], chips) &&
-                includesChipInChips([r - 2, c + 2], chips) &&
-                includesChipInChips([r - 3, c + 3], chips)) {
-                winPosition.push([r, c], [r - 1, c + 1], [r - 2, c + 2], [r - 3, c + 3])
-                console.log(winPosition)
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function resetGame() {
-        setPlayer1(new Player('x', 'in_game', [], player1Name));
-        setPlayer2(new Player('o', 'in_game', [], player2Name));
-        setBoard({ board_state: 'pending', board: createBoard(), winner: null });
-        setCurrentPlayer(player1);
-    }
-
     function startGame() {
-        setPlayer1(new Player('x', 'in_game', [], player1Name));
-        setPlayer2(new Player('o', 'in_game', [], player2Name));
+        setPlayer1(new Player('x', 'in_game', [], playerName1));
+        setPlayer2(new Player('o', 'in_game', [], playerName2));
         setBoard({ board_state: 'pending', board: createBoard(), winner: null });
         setCurrentPlayer(player1);
     }
 
     return (
         <div className="board">
-
-
-            <div className="players-container">
-                <div className="player">
-                    <span>Игрок 1</span>
-                    <input type="text" value={player1Name} onChange={(e) => setPlayer1Name(e.target.value)} />
-                </div>
-                <div className="player">
-                    <span>Игрок 2</span>
-                    <input type="text" value={player2Name} onChange={(e) => setPlayer2Name(e.target.value)} />
-                </div>
-            </div>
-
-            {
-                (board.winner && board.board_state === 'win') && (
-                    <h2 className="text winner-text">Победитель: {board.winner.name}</h2>
-                )
-            }
-
-            {
-                (board.board_state === 'draw') &&
-                <h2 className="text draw-text">Ничья</h2>
-            }
-
+            <ModalResult {...board} />
             <div className="board-container">
-
                 {
                     (board.board_state !== 'waiting') &&
                     board.board.map((row) => (
@@ -203,13 +92,14 @@ function Board() {
                     ))
                 }
             </div>
+
             {
                 board.board_state === 'waiting' &&
                 <button onClick={() => startGame()} className="btn">Начать игру</button>
             }
             {
                 board.board_state !== "waiting" &&
-                <button onClick={() => resetGame()} className="btn">Начать заново</button>
+                <button onClick={() => startGame()} className="btn">Начать заново</button>
             }
         </div>
     );

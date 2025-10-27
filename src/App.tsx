@@ -42,16 +42,21 @@ function App() {
 
   }, []);
 
-  const handleStart = (name1: string, name2: string) => {
+  function handleStart (name1: string, name2: string) {
     setPlayer1(new Player('x', 'in_game', [], name1, 0));
     setPlayer2(new Player('o', 'in_game', [], name2, 0));
     setShowNameModal(false);
   };
 
+  function handleNewGame() {
+    setShowNameModal(true);
+  }
+
   return (
     <div className='app'>
       <header className='header'>
         <h1 className='title'>ИГРА "4 В РЯД"</h1>
+        <button onClick={handleNewGame} className="btn btn-header">Начать новое противостояние</button>
       </header>
       {
         showNameModal && <ModalEnterNames onSubmit={handleStart} />

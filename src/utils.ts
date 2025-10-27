@@ -1,4 +1,4 @@
-import type { Player } from "./modules";
+import { Player } from "./modules";
 
 function includesChipInChips(chip: [number, number], chipsArr: [number, number][]) {
     for (const item of chipsArr) {
@@ -8,6 +8,20 @@ function includesChipInChips(chip: [number, number], chipsArr: [number, number][
     }
     return false;
 }
+
+export function loadPlayerFromStorage(key: string, defaultName: string, sym: 'x' | 'o') {
+  const data = localStorage.getItem(key);
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      return new Player(sym, 'in_game', parsed.chips || [], parsed.name || defaultName, parsed.score || 0);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  return new Player(sym, 'in_game', [], defaultName, 0);
+}
+
 // chip[0] - row, chip[1] - column
 export function checkWin(player: Player) {
     const winPosition = [];

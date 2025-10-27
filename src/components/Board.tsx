@@ -4,7 +4,7 @@ import { checkWin } from "../utils";
 import ModalResult from "./modalResult";
 
 
-function Board({rows, columns, player1, player2, setPlayer1, setPlayer2 ,playerName1, playerName2}: IBoardProps) {
+function Board({rows, columns, player1, player2, setPlayer1, setPlayer2}: IBoardProps) {
     // коор. х - строки (0 <= x <= 5)
     // коор. y - стобцы (0 <= y <= 6)
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
@@ -23,14 +23,14 @@ function Board({rows, columns, player1, player2, setPlayer1, setPlayer2 ,playerN
     useEffect(() => {
         if (player1.status === 'in_game' && checkWin(player1)) {
             setBoard({ ...board, board_state: 'win', winner: player1 })
-            setPlayer1({ ...player1, status: 'winner' })
+            setPlayer1({ ...player1, status: 'winner', score: player1.score += 1})
         }
     }, [player1]);
 
     useEffect(() => {
         if (player2.status === 'in_game' && checkWin(player2)) {
-            setBoard({ ...board, board_state: 'win', winner: player2 })
-            setPlayer2({ ...player2, status: 'winner' })
+            setBoard({ ...board, board_state: 'win', winner: player2})
+            setPlayer2({ ...player2, status: 'winner', score: player2.score += 1 })
         }
     }, [player2]);
 
@@ -64,8 +64,8 @@ function Board({rows, columns, player1, player2, setPlayer1, setPlayer2 ,playerN
     }
 
     function startGame() {
-        setPlayer1(new Player('x', 'in_game', [], playerName1));
-        setPlayer2(new Player('o', 'in_game', [], playerName2));
+        setPlayer1(new Player('x', 'in_game', [], player1.name, player1.score));
+        setPlayer2(new Player('o', 'in_game', [], player2.name, player2.score));
         setBoard({ board_state: 'pending', board: createBoard(), winner: null });
         setCurrentPlayer(player1);
     }

@@ -1,14 +1,16 @@
+import type { Player } from "../modules";
+
 interface PlayersProps {
-    playerName: string,
-    setPlayerName: React.Dispatch<React.SetStateAction<string>>,
+    player: Player,
     text: string
 }
 
-function PlayerComponent({ playerName, setPlayerName, text }: PlayersProps) {
+function PlayerComponent({ player, text}: PlayersProps) {
     return (
         <div className="player">
             <span>{text}</span>
-            <input className="input-name" type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
+            <span>{player.name}</span>
+            <span>{player.score}</span>
         </div>
 
     );

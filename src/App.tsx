@@ -56,7 +56,7 @@ function App() {
     <div className='app'>
       <header className='header'>
         <h1 className='title'>ИГРА "4 В РЯД"</h1>
-        <button onClick={handleNewGame} className="btn btn-header">Начать новое противостояние</button>
+        <button onClick={handleNewGame} className="btn btn-header">Начать новую игру</button>
       </header>
       {
         showNameModal && <ModalEnterNames onSubmit={handleStart} />

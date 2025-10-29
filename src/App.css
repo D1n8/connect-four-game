@@ -90,6 +90,20 @@ body{
   padding: 20px;
   font-size: 18px;
   background-color: #fff;
+  font-weight: 600;
+  color: #0055c4;
+  border-radius: 10px;
+  border: 2px solid #0055c4;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover{
+  background-color:#0055c4;
+  color: #fff;
+}
+
+.btn-header:hover{
+  border-color: #fff;
 }
 
 .players-container{
@@ -104,12 +118,13 @@ body{
   padding: 30px;
   flex-direction: column;
   gap: 10px;
+  border-radius: 20px;
   font-weight: 600;
+  font-size: 20px;
   color: #fff;
 }
 
 .player .subtitle{
-  font-size: 20px;
   text-align: center;
 }
 
@@ -120,7 +135,6 @@ body{
 }
 
 .player .score{
-  font-size: 20px;
   text-align: center;
 }
 

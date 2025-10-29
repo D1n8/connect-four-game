@@ -5,7 +5,6 @@
 }
 
 body{
-  
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -16,6 +15,27 @@ body{
   align-items: center;
   justify-content: center;
   background-color: #0055c4;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.title{
+  font-size: 32px;
+  color: #fff;
+  margin: 0;
+}
+
+.btn-header {
+  position: absolute;
+  right: 20px;
 }
 
 .main{
@@ -29,12 +49,6 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.title{
-  position: fixed;
-  font-style: 32px;
-  color: #fff;
 }
 
 .board {
@@ -58,14 +72,24 @@ body{
   outline: 1px solid black;
 }
 
+.chip {
+  width: 95%;
+  height: 95%;
+  border-radius: 100%;
+}
+
+.red{
+  background-color: red;
+}
+
+.blue{
+  background-color: #2196f3;
+}
+
 .btn{
   padding: 20px;
   font-size: 18px;
   background-color: #fff;
-}
-
-.btn-header{
- margin-right: -65%;
 }
 
 .players-container{
@@ -75,12 +99,29 @@ body{
 
 .player{
   display: flex;
-  padding: 10px;
+  max-width: 200px;
+  width: 100%;
+  padding: 30px;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
-  border: 2px solid #0055c4;
   font-weight: 600;
+  color: #fff;
+}
+
+.player .subtitle{
+  font-size: 20px;
+  text-align: center;
+}
+
+.player .name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+}
+
+.player .score{
+  font-size: 20px;
+  text-align: center;
 }
 
 .input-name{

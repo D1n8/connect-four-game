@@ -7,10 +7,10 @@ interface PlayersProps {
 
 function PlayerComponent({ player, text}: PlayersProps) {
     return (
-        <div className="player">
-            <span>{text}</span>
-            <span>{player.name}</span>
-            <span>{player.score}</span>
+        <div className={player.sym === 'x' ? `player red` : 'player blue'}>
+            <span className="subtitle">{text}</span>
+            <span className="name">{player.name}</span>
+            <span className="score">Счет: {player.score}</span>
         </div>
 
     );

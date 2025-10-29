@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Player, type IBoard, type IBoardProps } from "../modules";
 import { checkWin } from "../utils";
 import ModalResult from "./modalResult";
+import Chip from "./Chip";
 
 
-function Board({rows, columns, player1, player2, setPlayer1, setPlayer2}: IBoardProps) {
+function Board({ rows, columns, player1, player2, setPlayer1, setPlayer2 }: IBoardProps) {
     // коор. х - строки (0 <= x <= 5)
     // коор. y - стобцы (0 <= y <= 6)
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
@@ -23,13 +24,13 @@ function Board({rows, columns, player1, player2, setPlayer1, setPlayer2}: IBoard
     useEffect(() => {
         if (player1.status === 'in_game' && checkWin(player1)) {
             setBoard({ ...board, board_state: 'win', winner: player1 })
-            setPlayer1({ ...player1, status: 'winner', score: player1.score += 1})
+            setPlayer1({ ...player1, status: 'winner', score: player1.score += 1 })
         }
     }, [player1]);
 
     useEffect(() => {
         if (player2.status === 'in_game' && checkWin(player2)) {
-            setBoard({ ...board, board_state: 'win', winner: player2})
+            setBoard({ ...board, board_state: 'win', winner: player2 })
             setPlayer2({ ...player2, status: 'winner', score: player2.score += 1 })
         }
     }, [player2]);
@@ -84,7 +85,17 @@ function Board({rows, columns, player1, player2, setPlayer1, setPlayer2}: IBoard
                                         handleMove(columnIndex)
                                 }
                                 } className="board-cell">
-                                    <div>{column}</div>
+                                    {
+                                        column === 'x' && (
+                                            <Chip color='red' />
+                                        )
+                                    }
+                                    {
+                                        column === 'o' && (
+                                            <Chip color='blue' />
+                                        )
+                                    }
+
                                 </div>
                             ))
                         }

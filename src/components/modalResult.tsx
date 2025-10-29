@@ -5,8 +5,8 @@ function modalResult(boardProps: IBoard) {
         <>
             {
                 (boardProps.winner && boardProps.board_state === 'win') && (
-                    <div className="winner">
-                        <span className="text">Победитель: {boardProps.winner.name}</span>
+                    <div className="result winner">
+                        <span className="result-text text">Победитель: {boardProps.winner.name}</span>
                     </div>
                 )
             }
@@ -14,8 +14,8 @@ function modalResult(boardProps: IBoard) {
             {
                 (boardProps.board_state === 'draw') &&
                 (
-                    <div className="draw">
-                        <span className="text text">Ничья</span>
+                    <div className="result draw">
+                        <span className="text">Ничья</span>
                     </div>
                 )
             }

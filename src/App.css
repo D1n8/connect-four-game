@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.header{
+.header {
   width: 100%;
   height: 100px;
   display: flex;
@@ -27,7 +27,7 @@ body{
   max-width: 1200px;
 }
 
-.title{
+.title {
   font-size: 32px;
   color: #fff;
   margin: 0;
@@ -38,14 +38,14 @@ body{
   right: 20px;
 }
 
-.main{
+.main {
   display: flex;
   margin: 30px 80px;
   justify-content: space-around;
   align-items: start;
 }
 
-.section-board{
+.section-board {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,15 +78,15 @@ body{
   border-radius: 100%;
 }
 
-.red{
+.red {
   background-color: red;
 }
 
-.blue{
+.blue {
   background-color: #2196f3;
 }
 
-.btn{
+.btn {
   padding: 20px;
   font-size: 18px;
   background-color: #fff;
@@ -97,21 +97,21 @@ body{
   transition: all 0.3s ease-in-out;
 }
 
-.btn:hover{
-  background-color:#0055c4;
+.btn:hover {
+  background-color: #0055c4;
   color: #fff;
 }
 
-.btn-header:hover{
+.btn-header:hover {
   border-color: #fff;
 }
 
-.players-container{
+.players-container {
   display: flex;
   gap: 20px;
 }
 
-.player{
+.player {
   display: flex;
   max-width: 200px;
   width: 100%;
@@ -124,7 +124,7 @@ body{
   color: #fff;
 }
 
-.player .subtitle{
+.player .subtitle {
   text-align: center;
 }
 
@@ -134,38 +134,50 @@ body{
   text-align: center;
 }
 
-.player .score{
+.player .score {
   text-align: center;
 }
 
-.input-name{
+.input-name {
   padding: 5px;
   font-family: 'Open Sans', sans-serif;
 }
 
-.winner{
+.winner {
   padding: 20px;
   background-color: #00992e;
 }
 
-.draw{
+.draw {
   padding: 20px;
   background-color: #7e7e7e;
 }
 
-.text{
+.text {
   font-size: 20px;
   font-weight: 600;
   font-size: 30px;
   color: #fff;
 }
 
+.result {
+  width: 700px;
+  text-align: center;
+}
+
+.result .result-text {
+  display: inline-block;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
 /*Модалка*/
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +191,7 @@ body{
   text-align: center;
 }
 
-.modal-title{
+.modal-title {
   margin-bottom: 20px;
 }
 
@@ -189,7 +201,7 @@ body{
   gap: 10px;
 }
 
-.modal-input-container{
+.modal-input-container {
   display: flex;
   align-items: center;
   justify-content: space-between;

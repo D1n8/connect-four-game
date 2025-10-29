@@ -13,6 +13,7 @@ function App() {
   const [board, setBoard] = useState<IBoard>({ board_state: 'waiting', board: createBoard(rows, columns), winner: null });
   const [player1, setPlayer1] = useState<Player | null>(null);
   const [player2, setPlayer2] = useState<Player | null>(null);
+  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(player1);
   const [showNameModal, setShowNameModal] = useState(true);
 
   useEffect(() => {
@@ -45,11 +46,15 @@ function App() {
   }, []);
 
   function handleStart(name1: string, name2: string) {
-    setPlayer1(new Player('x', 'in_game', [], name1, 0));
-    setPlayer2(new Player('o', 'in_game', [], name2, 0));
+    const newPlayer1 = new Player('x', 'in_game', [], name1, 0);
+    const newPlayer2 = new Player('o', 'in_game', [], name2, 0);
+
+    setPlayer1(newPlayer1);
+    setPlayer2(newPlayer2);
     setBoard({ board_state: 'pending', board: createBoard(rows, columns), winner: null });
+    setCurrentPlayer(newPlayer1);
     setShowNameModal(false);
-  };
+  }
 
   function handleNewGame() {
     setShowNameModal(true);
@@ -73,7 +78,7 @@ function App() {
           (
             <>
               <PlayerComponent text='Игрок 1' player={player1} />
-              <Board board={board} rows={rows} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} setBoard={setBoard} />
+              <Board board={board} rows={rows} currentPlayer={currentPlayer} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} setBoard={setBoard} setCurrentPlayer={setCurrentPlayer} />
               <PlayerComponent text='Игрок 2' player={player2} />
             </>
           )

@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Player, type IBoardProps } from "../modules";
 import { checkWin, createBoard } from "../utils";
 import ModalResult from "./modalResult";
 import Chip from "./Chip";
 
 
-function Board({board, rows, columns, player1, player2, setPlayer1, setPlayer2, setBoard }: IBoardProps) {
+function Board({ board, rows, columns, currentPlayer, player1, player2, setPlayer1, setPlayer2, setBoard, setCurrentPlayer }: IBoardProps) {
     // коор. х - строки (0 <= x <= 5)
     // коор. y - стобцы (0 <= y <= 6)
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
-
     const countCells = rows * columns;
-    const [currentPlayer, setCurrentPlayer] = useState<Player>(player1);
 
     useEffect(() => {
         const filledCells = board.board.flat().filter(cell => cell !== null).length; //кол-во заполненных клеток 
@@ -35,6 +33,8 @@ function Board({board, rows, columns, player1, player2, setPlayer1, setPlayer2, 
     }, [player2]);
 
     function handleMove(columnIndex: number) {
+        if (!currentPlayer) return;
+
         const newBoard = [...board.board];
         for (let i = 5; i >= 0; i--) {
             if (newBoard[i][columnIndex] === null) {

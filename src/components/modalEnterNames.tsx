@@ -17,13 +17,13 @@ function ModalEnterNames({ onSubmit }: ModalEnterNamesProps) {
     return (
         <div className="modal-overlay">
             <div className="modal">
-                <h2>Введите имена игроков</h2>
+                <h2 className="modal-title">Введите имена игроков</h2>
                 <form onSubmit={handleSubmit} className="modal-form">
-                    <label>
+                    <label className="modal-input-container">
                         Игрок 1:
                         <input type="text" value={name1} onChange={(e) => setName1(e.target.value)} placeholder="Имя первого игрока" />
                     </label>
-                    <label>
+                    <label className="modal-input-container">
                         Игрок 2:
                         <input type="text" value={name2} onChange={(e) => setName2(e.target.value)} placeholder="Имя второго игрока"
                         />

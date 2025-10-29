@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import Board from './components/Board'
 import PlayerComponent from './components/Player';
-import { Player } from './modules';
+import { Player, type IBoard } from './modules';
 import ModalEnterNames from './components/modalEnterNames';
+import { createBoard } from './utils';
 
 function App() {
   const rows = 6;
   const columns = 7;
 
+  const [board, setBoard] = useState<IBoard>({ board_state: 'waiting', board: createBoard(rows, columns), winner: null });
   const [player1, setPlayer1] = useState<Player | null>(null);
   const [player2, setPlayer2] = useState<Player | null>(null);
   const [showNameModal, setShowNameModal] = useState(true);
@@ -45,6 +47,7 @@ function App() {
   function handleStart(name1: string, name2: string) {
     setPlayer1(new Player('x', 'in_game', [], name1, 0));
     setPlayer2(new Player('o', 'in_game', [], name2, 0));
+    setBoard({ board_state: 'pending', board: createBoard(rows, columns), winner: null });
     setShowNameModal(false);
   };
 
@@ -70,7 +73,7 @@ function App() {
           (
             <>
               <PlayerComponent text='Игрок 1' player={player1} />
-              <Board rows={rows} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} />
+              <Board board={board} rows={rows} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} setBoard={setBoard} />
               <PlayerComponent text='Игрок 2' player={player2} />
             </>
           )

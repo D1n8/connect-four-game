@@ -31,8 +31,10 @@ export class Player implements IPlayer {
 export interface IBoardProps {
     rows: number,
     columns: number,
+    board: IBoard,
     player1: Player,
     player2: Player,
     setPlayer1: React.Dispatch<React.SetStateAction<Player | null>>,
     setPlayer2: React.Dispatch<React.SetStateAction<Player | null>>,
+    setBoard: React.Dispatch<React.SetStateAction<IBoard>>
 }

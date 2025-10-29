@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { Player, type IBoard, type IBoardProps } from "../modules";
-import { checkWin } from "../utils";
+import { Player, type IBoardProps } from "../modules";
+import { checkWin, createBoard } from "../utils";
 import ModalResult from "./modalResult";
 import Chip from "./Chip";
 
 
-function Board({ rows, columns, player1, player2, setPlayer1, setPlayer2 }: IBoardProps) {
+function Board({board, rows, columns, player1, player2, setPlayer1, setPlayer2, setBoard }: IBoardProps) {
     // коор. х - строки (0 <= x <= 5)
     // коор. y - стобцы (0 <= y <= 6)
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
 
     const countCells = rows * columns;
     const [currentPlayer, setCurrentPlayer] = useState<Player>(player1);
-    const [board, setBoard] = useState<IBoard>({ board_state: 'waiting', board: createBoard(), winner: null });
 
     useEffect(() => {
         const filledCells = board.board.flat().filter(cell => cell !== null).length; //кол-во заполненных клеток 
@@ -34,11 +33,6 @@ function Board({ rows, columns, player1, player2, setPlayer1, setPlayer2 }: IBoa
             setPlayer2({ ...player2, status: 'winner', score: player2.score += 1 })
         }
     }, [player2]);
-
-
-    function createBoard(): ('x' | 'o' | null)[][] {
-        return Array(rows).fill(null).map(() => Array(columns).fill(null))
-    }
 
     function handleMove(columnIndex: number) {
         const newBoard = [...board.board];
@@ -67,7 +61,7 @@ function Board({ rows, columns, player1, player2, setPlayer1, setPlayer2 }: IBoa
     function startGame() {
         setPlayer1(new Player('x', 'in_game', [], player1.name, player1.score));
         setPlayer2(new Player('o', 'in_game', [], player2.name, player2.score));
-        setBoard({ board_state: 'pending', board: createBoard(), winner: null });
+        setBoard({ board_state: 'pending', board: createBoard(rows, columns), winner: null });
         setCurrentPlayer(player1);
     }
 

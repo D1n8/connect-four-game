@@ -11,6 +11,7 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
     const countCells = rows * columns;
 
+
     useEffect(() => {
         const filledCells = board.board.flat().filter(cell => cell !== null).length; //кол-во заполненных клеток 
         if (board.board_state === 'pending' && filledCells === countCells) {
@@ -19,14 +20,14 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
     }, [board])
 
     useEffect(() => {
-        if (player1.status === 'in_game' && checkWin(player1)) {
+        if (player1.status === 'in_game' && checkWin(player1.chips).isWin) {
             setBoard({ ...board, board_state: 'win', winner: player1 })
             setPlayer1({ ...player1, status: 'winner', score: player1.score += 1 })
         }
     }, [player1]);
 
     useEffect(() => {
-        if (player2.status === 'in_game' && checkWin(player2)) {
+        if (player2.status === 'in_game' && checkWin(player2.chips).isWin) {
             setBoard({ ...board, board_state: 'win', winner: player2 })
             setPlayer2({ ...player2, status: 'winner', score: player2.score += 1 })
         }

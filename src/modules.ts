@@ -40,3 +40,18 @@ export interface IBoardProps {
     setBoard: React.Dispatch<React.SetStateAction<IBoard>>,
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | null>>
 }
+
+
+export interface IResult {
+    player_1: [number, number][],
+    player_2: [number, number][],
+    board_state: 'waiting' | 'pending' | 'win' | 'draw',
+    winner?: {
+        who: 'player_1' | 'player_2',
+        positions: [number, number][]
+    }
+}
+
+export interface IStepsHistory{
+    [key: string]: IResult
+}

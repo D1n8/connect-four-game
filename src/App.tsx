@@ -4,7 +4,7 @@ import Board from './components/Board'
 import PlayerComponent from './components/Player';
 import { Player, type IBoard } from './modules';
 import ModalEnterNames from './components/modalEnterNames';
-import { createBoard, validator } from './utils';
+import { createBoard } from './utils';
 
 function App() {
   const rows = 6;
@@ -60,27 +60,6 @@ function App() {
     setShowNameModal(true);
   }
 
-  const handleClick = () => {
-    try {
-      console.log("Тест 1: пустой массив");
-      console.log(validator([]));
-
-      console.log("Тест 2: победа player_1 по вертикали");
-      console.log(validator([1, 2, 1, 2, 1, 2, 1]));
-
-      console.log('Тест 3: ничья')
-      console.log(validator([0,0,0,0,0,0, 1,1,1,1,1,1, 2,2,2,2,2,2, 6, 3,3,3,3,3,3, 4,4,4,4,4,4, 5,5,5,5,5,5, 6,6,6,6,6]))
-
-      console.log("Тест 4: выход за границы");
-      console.log(validator([0, 1, 3, 2, 7])); // ошибка
-
-      console.log("Тест 5: переполнение столбца");
-      console.log(validator([0, 0, 0, 0, 0, 0, 0])); // ошибка
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   return (
     <div className='app'>
       <header className='header'>
@@ -89,7 +68,6 @@ function App() {
           <button onClick={handleNewGame} className="btn btn-header">Начать новую игру</button>
         </div>
       </header>
-      <button onClick={handleClick}>Тест validator</button>
 
       {
         showNameModal && <ModalEnterNames onSubmit={handleStart} />
@@ -108,6 +86,7 @@ function App() {
         }
 
       </main>
+
     </div>
   )
 }

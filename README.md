@@ -18,3 +18,9 @@ docker-compose up --build
 ```
 
 Игра будет доступна по [адресу](http://localhost:5173)
+
+## Тестирование
+Чтобы протестировать функцию validator введите команду:
+```bash
+npm run test
+```

@@ -57,6 +57,8 @@ function App() {
   }
 
   function handleNewGame() {
+    setBoard({ board_state: 'waiting', board: createBoard(rows, columns), winner: null });
+    setCurrentPlayer(null);
     setShowNameModal(true);
   }
 
@@ -78,9 +80,9 @@ function App() {
           (player1 && player2) &&
           (
             <>
-              <PlayerComponent text='Игрок 1' player={player1} />
+              <PlayerComponent text='Игрок 1' player={player1} isCurrent={currentPlayer === player1} />
               <Board board={board} rows={rows} currentPlayer={currentPlayer} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} setBoard={setBoard} setCurrentPlayer={setCurrentPlayer} />
-              <PlayerComponent text='Игрок 2' player={player2} />
+              <PlayerComponent text='Игрок 2' player={player2} isCurrent={currentPlayer === player2} />
             </>
           )
         }

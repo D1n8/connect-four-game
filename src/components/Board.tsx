@@ -11,7 +11,6 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
     // board[x][y], x - макс индекс(низшая точки), y - выбранная колонка
     const countCells = rows * columns;
 
-
     useEffect(() => {
         const filledCells = board.board.flat().filter(cell => cell !== null).length; //кол-во заполненных клеток 
         if (board.board_state === 'pending' && filledCells === countCells) {
@@ -60,10 +59,13 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
     }
 
     function startGame() {
-        setPlayer1(new Player('x', 'in_game', [], player1.name, player1.score));
-        setPlayer2(new Player('o', 'in_game', [], player2.name, player2.score));
+        const newPlayer1 = new Player('x', 'in_game', [], player1.name, player1.score);
+        const newPlayer2 = new Player('o', 'in_game', [], player2.name, player2.score);
+
+        setPlayer1(newPlayer1);
+        setPlayer2(newPlayer2);
         setBoard({ board_state: 'pending', board: createBoard(rows, columns), winner: null });
-        setCurrentPlayer(player1);
+        setCurrentPlayer(newPlayer1);
     }
 
     return (

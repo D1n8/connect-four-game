@@ -138,6 +138,10 @@ body {
   text-align: center;
 }
 
+.current{
+  outline: 4px solid black;
+}
+
 .input-name {
   padding: 5px;
   font-family: 'Open Sans', sans-serif;

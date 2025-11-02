@@ -37,7 +37,7 @@ export interface IBoardProps {
     currentPlayer: Player | null,
     setPlayer1: React.Dispatch<React.SetStateAction<Player | null>>,
     setPlayer2: React.Dispatch<React.SetStateAction<Player | null>>,
-    setBoard: React.Dispatch<React.SetStateAction<IBoard>>,
+    setBoard: React.Dispatch<React.SetStateAction<IBoard | null>>,
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | null>>
 }
 

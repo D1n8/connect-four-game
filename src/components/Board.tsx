@@ -35,7 +35,7 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
     function handleMove(columnIndex: number) {
         if (!currentPlayer) return;
 
-        const newBoard = [...board.board];
+        const newBoard = board.board.map(row => [...row]);
         for (let i = 5; i >= 0; i--) {
             if (newBoard[i][columnIndex] === null) {
                 newBoard[i][columnIndex] = currentPlayer.sym;

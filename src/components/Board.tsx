@@ -70,7 +70,7 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
 
     return (
         <div className="board">
-            <ModalResult {...board} />
+            <ModalResult boardProps={board} startGame={startGame}/>
             <div className="board-container">
                 {
                     (board.board_state !== 'waiting') &&

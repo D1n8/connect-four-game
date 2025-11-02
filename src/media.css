@@ -1,0 +1,49 @@
+@media (max-width: 768px) {
+    .header-container {
+        margin-left: 20px;
+        justify-content: start;
+    }
+
+    .board-cell {
+        width: 75px;
+        height: 75px;
+    }
+
+    .players-container {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .title {
+        font-size: 18px;
+    }
+
+    .board-cell {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .players-container {
+        gap: 20px;
+    }
+
+    .player {
+        padding: 5px;
+        max-width: 200px;
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .board-cell {
+        width: 50px;
+        height: 50px;
+    }
+}

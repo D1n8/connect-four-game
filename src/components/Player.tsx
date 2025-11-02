@@ -9,9 +9,9 @@ interface PlayersProps {
 function PlayerComponent({ player, text, isCurrent }: PlayersProps) {
     return (
         <div className={`${player.sym === 'x' ? `player red` : 'player blue'} ${isCurrent ? 'current' : ''}`}>
+            <span className="score">{player.score}</span>
             <span className="subtitle">{text}</span>
             <span className="name">{player.name}</span>
-            <span className="score">Счет: {player.score}</span>
         </div>
 
     );

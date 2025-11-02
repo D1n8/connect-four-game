@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import './App.css'
-import Board from './components/Board'
+import './App.css';
+import './media.css';
+import Board from './components/Board';
 import PlayerComponent from './components/Player';
 import { Player, type IBoard } from './modules';
 import ModalEnterNames from './components/modalEnterNames';
@@ -96,9 +97,11 @@ function App() {
           (player1 && player2 && board) &&
           (
             <>
-              <PlayerComponent text='Игрок 1' player={player1} isCurrent={currentPlayer === player1} />
+              <div className="players-container">
+                <PlayerComponent text='Игрок 1' player={player1} isCurrent={currentPlayer === player1} />
+                <PlayerComponent text='Игрок 2' player={player2} isCurrent={currentPlayer === player2} />
+              </div>
               <Board board={board} rows={rows} currentPlayer={currentPlayer} columns={columns} player1={player1} player2={player2} setPlayer1={setPlayer1} setPlayer2={setPlayer2} setBoard={setBoard} setCurrentPlayer={setCurrentPlayer} />
-              <PlayerComponent text='Игрок 2' player={player2} isCurrent={currentPlayer === player2} />
             </>
           )
         }

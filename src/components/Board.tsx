@@ -74,10 +74,10 @@ function Board({ board, rows, columns, currentPlayer, player1, player2, setPlaye
             <div className="board-container">
                 {
                     (board.board_state !== 'waiting') &&
-                    board.board.map((row) => (
-                        <div className="board-row">{
+                    board.board.map((row, rowIndex) => (
+                        <div key={rowIndex} className="board-row">{
                             row.map((column, columnIndex) => (
-                                <div onClick={() => {
+                                <div key={columnIndex} onClick={() => {
                                     if (board.board_state === 'pending')
                                         handleMove(columnIndex)
                                 }
